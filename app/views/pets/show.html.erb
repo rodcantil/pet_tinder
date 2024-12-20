@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pet %>
+
+  <h2 class="my-5 text-center">Comentarios</h2>
+  <div class="container">
+    <% @comments.each do |comment| %>    
+      <div class="d-flex align-items-center">
+        <div class="mx-2"><%= image_tag(comment.user.image, style:"height: 50px;") %></div>
+        <div  class="fw-bold mx-2"><%= comment.user.name %></div>
+      </div><br>
+      <div><%= comment.content %></div>
+      <br>
+    <% end %>
+  </div>
+
+<div class="d-flex gap-2 my-5">
+  <%= link_to "Volver a Pets", pets_path, class:"btn btn-dark" %>
+  <% if user_signed_in? %> 
+    <%= link_to "Nuevo Comentario", new_comment_path(@pet), class:"btn btn-dark" %>
+    <% if current_user.id == @pet.user_id %>
+      <%= link_to "Editar este Post", edit_pet_path(@pet), class:"btn btn-dark" %>
+      <%= button_to "Eliminar", @pet, class:"btn btn-danger btn-sm", method: :delete %>
+    <% end %>
+  <% end %>
+  </div>

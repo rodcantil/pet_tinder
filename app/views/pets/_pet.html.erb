@@ -1,0 +1,38 @@
+<div id="<%= dom_id pet %>">
+  <div class="row">
+    <div class="col-3">
+      <div class="card">
+        <% if pet.images.exists?  %>
+          <%= image_tag pet.images.last, class: 'card-img-top' %>
+        <% end %>
+        <div class="card-body">
+          <div class="owner-avatar">
+            <%= pet.user.name %>
+          </div>
+          <h5 class="card-title"><%= pet.name %></h5>
+          <p class="card-text">
+            <strong>Raza:</strong><%= pet.breed%><br>
+            <strong>Edad:</strong><%= pet.age %><br>
+            <strong>Género:</strong><%= pet.gender %>
+          </p>
+        </div>
+      </div>
+    </div>
+      <% if pet.images.exists? %>
+        <div class="col-7">
+          <h3 class="text-center card-body">Mis Fotos</h3>
+          <div class="card">
+            <% pet.images.each do |image| %>
+            <div class="row flex-nowrap">
+                <div class="col-4">
+                    <%= image_tag image, class:"w-75 card-img-top" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+  </div>
+
+</div>
